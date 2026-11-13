@@ -1,0 +1,70 @@
+# ============================================================
+#  Configuración de Lavalink 4.2.2 + LavaSrc + YouTube Plugin
+# ============================================================
+
+server:
+  port: 2333
+  address: 127.0.0.1
+
+lavalink:
+  server:
+    password: "${LAVA_LINK_PASSWORD:botds_lavalink_pw}"
+    # Remuestreo 44.1 kHz -> 48 kHz con el filtro de mayor calidad
+    # (por defecto LOW). Gana nitidez en la salida hacia Discord.
+    resamplingQuality: LOW
+    sources:
+      # La fuente integrada de YouTube está desactivada porque
+      # usamos el plugin oficial youtube-plugin 1.18.2.
+      youtube: false
+      soundcloud: true
+      bandcamp: true
+      twitch: true
+      vimeo: true
+      nico: true
+      http: true
+      local: false
+
+plugins:
+  # ---- YouTube plugin (links y búsqueda de YouTube / YouTube Music) ----
+  youtube:
+    enabled: true
+    allowSearch: true             # habilita "ytsearch:" y "ytmsearch:"
+    allowDirectVideoIds: true     # permite links sueltos de video
+    allowDirectPlaylistIds: true  # permite links de playlist (ej. YouTube Music)
+    # Cipher remoto: sin él, YouTube no entrega streams de audio
+    # ("No supported audio streams available, available types: ").
+    # Servidor público gratuito del mantenidor del plugin (issue #240).
+    remoteCipher:
+      url: "https://cipher.kikkia.dev/"
+    clients: [TV, TVHTML5_SIMPLY, WEB, MUSIC, WEBEMBEDDED, ANDROID_VR, MWEB]
+
+  # ---- LavaSrc (fuente de Spotify) ----
+  lavasrc:
+    sources:
+      spotify: true
+      applemusic: false
+      deezer: false
+      yandexmusic: false
+      flowerytts: false
+      youtube: false   # LavaSearch (búsqueda YT Music) - no hace falta
+      vkmusic: false
+      tidal: false
+      qobuz: false
+      ytdlp: false
+      jiosaavn: false
+    spotify:
+      # Credenciales de la app Spotify: llegan como variables de entorno
+      # desde .env (las exportan start.sh / start.bat). No van en el repo.
+      clientId: "${SPOTIFY_CLIENT_ID:}"
+      clientSecret: "${SPOTIFY_CLIENT_SECRET:}"
+      countryCode: "US"
+      playlistLoadLimit: 6
+      albumLoadLimit: 6
+      resolveArtistsInSearch: true
+      # Las playlists van por la Partner API (reproductor web) primero;
+      # la API v1 exige usuario desde el cambio de Spotify de 2026 (issue #358).
+      preferPartnerApi: true
+      # Token anónimo (necesario para la Partner API): lo sirve nuestro
+      # servidor local porque el extractor del plugin quedó obsoleto
+      # (Spotify cambió el secret a formato XOR y totpVer=61 en2025).
+      customTokenEndpoint: "http://127.0.0.1:2334/spotify-token"

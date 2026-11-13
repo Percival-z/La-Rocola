@@ -1,0 +1,19 @@
+# Secretos — NUNCA subir
+.env
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# JDK y binarios pesados (se descargan, no se suben)
+jdk/
+*.jar
+*.bak
+
+# Logs
+logs/
+*.log
+
+# Basura del sistema / intentos fallidos
+master/
