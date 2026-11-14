@@ -9,11 +9,7 @@ música por voz usando **Lavalink 4**, **Wavelink 3** y **LavaSrc** (Spotify) + 
 - Un JDK 21 (ver la sección *Binarios*)
 - Un token de bot de Discord en `.env` (ver `.env.example`)
 
-## Binarios (no se suben al repo)
-
-GitHub no admite archivos gigantes (el JDK pesa ~300 MB y `Lavalink.jar` ~96 MB),
-así que `jdk/`, `*.jar` y los logs están en `.gitignore`. Después de clonar,
-descarga lo que falta:
+## Binarios
 
 | Qué | Dónde | Destino |
 |---|---|---|
@@ -22,8 +18,6 @@ descarga lo que falta:
 | Plugin YouTube (snapshot `2be8e542`) | [Maven snapshots](https://maven.lavalink.dev/snapshots/dev/lavalink/youtube/youtube-plugin/2be8e542d3f6f178e048dca565892684c2e40177/youtube-plugin-2be8e542d3f6f178e048dca565892684c2e40177.jar) | `lavalink/plugins/` |
 | JDK 21 | [Temurin](https://adoptium.net/temurin/releases/) → `.zip` | extraído como `jdk/` (Windows: `jdk\bin\java.exe`) |
 | Configuración | `cp .env.example .env` y rellena | `.env` |
-
-Los `.bak` de plugins son solo respaldos locales: se ignoran.
 
 ## Estructura
 
